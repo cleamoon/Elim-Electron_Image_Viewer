@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { dialog } from 'electron'
 
 import HelloWorld from './components/HelloWorld.vue'
 
 const filePath = ref<string>('')
-const openImage = () =>
-  dialog.showOpenDialog({ properties: ['openFile'] })
-    .then(({ canceled, filePaths }) => {
-      if (canceled) return
-      filePath.value = filePaths[0]
-    })
 
-console.log('filePath')
+const openImage = () => {
+  window.fileManaging.openFile().then((result) => filePath.value = result)
+}
 
 window.electronAPI.sendMessage('Hello from App.vue!');
 </script>
