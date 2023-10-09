@@ -1,7 +1,7 @@
 {
-  "name": "electron-vue-template",
-  "version": "0.1.0",
-  "description": "A minimal Electron + Vue application",
+  "name": "elim",
+  "version": "0.0.0",
+  "description": "A minimal image viewer written in Electron and Vue.js",
   "main": "build/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
@@ -11,10 +11,10 @@
     "build:mac": "node scripts/build.js && electron-builder --mac",
     "build:linux": "node scripts/build.js && electron-builder --linux"
   },
-  "repository": "https://github.com/deluze/electron-vue-template",
+  "repository": "https://github.com/cleamoon/Elim-Electron_Image_Viewer",
   "author": {
-    "name": "Deluze",
-    "url": "https://github.com/Deluze"
+    "name": "Yue Jiao",
+    "url": "https://yj0.se"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
