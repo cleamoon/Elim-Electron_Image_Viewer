@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, session } from 'electron';
+import { app, BrowserWindow, ipcMain, session, dialog } from 'electron';
 import { join } from 'path';
 
 function createWindow () {
@@ -9,13 +9,13 @@ function createWindow () {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: true,
-    }
+    },
   });
 
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   }
   else {
     mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
@@ -51,3 +51,12 @@ ipcMain.on('message', (event, message) => {
   console.log(event);
   console.log(message);
 })
+
+ipcMain.handle('openFile', async () =>
+  dialog.showOpenDialog({ properties: ['openFile'] })
+    .then(({ canceled, filePaths }) => {
+      console.log(filePaths)
+      if (canceled) return null;
+      return filePaths[0]
+    })
+)
