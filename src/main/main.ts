@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, session, dialog } from 'electron';
 import { join } from 'path';
+import * as fs from 'fs/promises';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
@@ -15,7 +16,7 @@ function createWindow () {
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
   else {
     mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
@@ -53,10 +54,27 @@ ipcMain.on('message', (event, message) => {
 })
 
 ipcMain.handle('openFile', async () =>
-  dialog.showOpenDialog({ properties: ['openFile'] })
+  dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }]
+  })
     .then(({ canceled, filePaths }) => {
-      console.log(filePaths)
       if (canceled) return null;
       return filePaths[0]
     })
 )
+
+ipcMain.handle('getFilesInFolder', async (_, folderPath) =>
+  fs.readdir(folderPath, { withFileTypes: true })
+    .then((fileEntries) => fileEntries
+      .filter((fileEntry) => fileEntry.isFile())
+      .map((fileEntry) => fileEntry.name)))
+
+ipcMain.handle('getFoldersInFolder', async (_, folderPath) =>
+  fs.readdir(folderPath, { withFileTypes: true })
+    .then((fileEntries) => fileEntries
+      .filter((fileEntry) => fileEntry.isDirectory())
+      .map((fileEntry) => fileEntry.name)))
+
+ipcMain.handle('readImage', async (_, imagePath) =>
+  fs.readFile(imagePath).then((buffer) => `data:image/jpeg;base64, ${buffer.toString('base64')}`))

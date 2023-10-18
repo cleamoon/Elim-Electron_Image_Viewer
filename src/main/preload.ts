@@ -6,4 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
 contextBridge.exposeInMainWorld('fileManaging', {
   openFile: () => ipcRenderer.invoke('openFile'),
+  getFilesInFolder: (folderPath: string) => ipcRenderer.invoke('getFilesInFolder', folderPath),
+  getFoldersInFolder: (folderPath: string) => ipcRenderer.invoke('getFoldersInFolder', folderPath),
+  readImage: (imagePath: string) => ipcRenderer.invoke('readImage', imagePath),
 })

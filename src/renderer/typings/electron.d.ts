@@ -7,7 +7,11 @@ export default interface ElectronApi {
 
 interface FileManagingApi {
   openFile: () => Promise<string>
+  getFilesInFolder: (folderPath: string) => Promise<string[]>
+  getFoldersInFolder: (folderPath: string) => Promise<string[]>
+  readImage: (imagePath: string) => Promise<Buffer>
 }
+
 declare global {
   interface Window {
     electronAPI: ElectronApi,
