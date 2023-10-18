@@ -17,6 +17,7 @@
     "url": "https://yj0.se"
   },
   "devDependencies": {
+    "@types/node": "^20.8.7",
     "@vitejs/plugin-vue": "^4.0.0",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
