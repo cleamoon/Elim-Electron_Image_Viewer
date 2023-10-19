@@ -9,6 +9,11 @@
     "outDir": "../../build/main",
     "allowJs": true,
     "noImplicitAny": false,
+    "include": [
+      "src/**/*",
+      "src/**/*.vue",
+      "**/*.d.ts"
+    ],
   },
   "exclude": [
     "static"
