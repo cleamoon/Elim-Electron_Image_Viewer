@@ -1,21 +1,54 @@
 <script setup lang="ts">
-import { image, filePath, folderPath, filesInFolder, parentFolder, foldersInParentFolder, file } from './components/FileManager.vue';
+import {
+  image,
+  filePath,
+  folderPath,
+  filesInFolder,
+  parentFolderPath,
+  foldersInParentFolder,
+  file,
+  fileIndex,
+  folderIndex,
+} from "./components/FileManager.vue";
+import { handleKeydown } from "./components/Shortcuts.vue";
+import { onMounted } from "vue";
 
 const openImage = () => {
-  window.fileManaging.openFile()
+  const fileManaging = window.fileManaging;
+  fileManaging.openFile()
     .then((file) => filePath.value = file)
-    .then(() => window.fileManaging.getFilesInFolder(folderPath.value))
-    .then((files) => filesInFolder.value = files.map(file => folderPath.value + '/' + file))
-    .then(() => window.fileManaging.getFoldersInFolder(parentFolder.value))
+    .then((filePath) => folderPath.value = filePath.split('/').slice(0, -1).join('/'))
+    .then((folderPath) => parentFolderPath.value = folderPath.split('/').slice(0, -1).join('/'))
+    .then(() => fileManaging.getFilesInFolder(folderPath.value))
+    .then((files) => filesInFolder.value = files.map((file) => folderPath.value + "/" + file))
+    .then((files) => fileIndex.value = files.indexOf(filePath.value))
+    .then(() => fileManaging.getFoldersInFolder(parentFolderPath.value))
     .then((folders) => foldersInParentFolder.value = folders)
-    .then(() => window.fileManaging.readImage(file.value))
-    .then((imageBlob) => image.value = imageBlob)
-}
+    .then((folders) => folderIndex.value = folders.indexOf(folderPath.value))
+    .then(() => fileManaging.readImage(file.value || ''))
+    .then((imageBlob) => image.value = imageBlob);
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", handleKeydown);
+});
 </script>
 
 <template>
-  <img v-bind:src="image" alt="Vite logo" />
-  <button @click="openImage">Open Image</button>
+  <div id="main">
+    <img :src="image" v-if="image.length" style="width: 100%; height: 100%; object-fit: contain;" />
+    <button @click="openImage" v-if="image.length === 0">Open Image</button>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}
+</style>
