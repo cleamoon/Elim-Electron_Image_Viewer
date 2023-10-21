@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  image,
   filePath,
   folderPath,
   filesInFolder,
@@ -11,7 +10,7 @@ import {
   folderIndex,
 } from "./components/FileManager.vue";
 import { handleKeydown } from "./components/Shortcuts.vue";
-import { onMounted } from "vue";
+import { onMounted, watchEffect, ref } from "vue";
 
 const openImage = () => {
   const fileManaging = window.fileManaging;
@@ -25,9 +24,16 @@ const openImage = () => {
     .then(() => fileManaging.getFoldersInFolder(parentFolderPath.value))
     .then((folders) => foldersInParentFolder.value = folders)
     .then((folders) => folderIndex.value = folders.indexOf(folderPath.value))
-    .then(() => fileManaging.readImage(file.value || ''))
-    .then((imageBlob) => image.value = imageBlob);
 };
+
+const image = ref<string>('');
+
+watchEffect(() => {
+  if (file.value) {
+    window.fileManaging.readImage(file.value)
+      .then((imageBlob) => image.value = imageBlob);
+  }
+});
 
 onMounted(() => {
   window.addEventListener("keydown", handleKeydown);
@@ -36,8 +42,8 @@ onMounted(() => {
 
 <template>
   <div id="main">
-    <img :src="image" v-if="image.length" style="width: 100%; height: 100%; object-fit: contain;" />
-    <button @click="openImage" v-if="image.length === 0">Open Image</button>
+    <img :src="image" v-if="image" style="width: 100%; height: 100%; object-fit: contain;" />
+    <button @click="openImage">Open Image</button>
   </div>
 </template>
 
