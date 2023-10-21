@@ -18,8 +18,6 @@ export const folderIndex = ref<number>(-1)
 export const file = computed(() =>
   filesInFolder.value.length && fileIndex.value >= 0 && filesInFolder.value[fileIndex.value])
 
-export const image = ref<string>('')
-
 export const changeFolder = (direction: number) => {
   if (direction > 0 && folderIndex.value + 1 <= foldersInParentFolder.value.length) {
       folderIndex.value += 1;
