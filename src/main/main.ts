@@ -64,10 +64,16 @@ ipcMain.handle('openFile', async () =>
     })
 )
 
+const isImageFile = (fileEntry) => {
+  const fileExtension = fileEntry.name.split('.').pop();
+  return ['jpg', 'png', 'gif'].includes(fileExtension);
+}
+
 ipcMain.handle('getFilesInFolder', async (_, folderPath) =>
   fs.readdir(folderPath, { withFileTypes: true })
     .then((fileEntries) => fileEntries
       .filter((fileEntry) => fileEntry.isFile())
+      .filter(isImageFile)
       .map((fileEntry) => fileEntry.name)))
 
 ipcMain.handle('getFoldersInFolder', async (_, folderPath) =>
