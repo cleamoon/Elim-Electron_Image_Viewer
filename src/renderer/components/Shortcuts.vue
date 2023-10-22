@@ -143,4 +143,8 @@ export const handleKeydown = (event) => {
   }
 };
 
+export default {
+  handleKeydown,
+}
+
 </script>

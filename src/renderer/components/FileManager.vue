@@ -71,4 +71,17 @@ export const deleteFile = () => {
       })
   }
 }
+
+export default {
+  parentFolderPath,
+  filesInFolder,
+  foldersInParentFolder,
+  fileIndex,
+  folderIndex,
+  folderPath,
+  file,
+  changeFolder,
+  openImage,
+  deleteFile
+}
 </script>
