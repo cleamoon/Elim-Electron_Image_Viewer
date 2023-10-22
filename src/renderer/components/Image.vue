@@ -18,7 +18,10 @@ watchEffect(() => {
     .then((imageBlob) => image.value = imageBlob)
 });
 
-
+export const showFilePath = ref<boolean>(true);
+export const defaultImageStyle = 'width: 100%; height: 100%; object-fit: contain;';
+export const scale = ref<number>(1.0);
+export const imageStyle = ref<string>('');
 </script>
 
 <template>

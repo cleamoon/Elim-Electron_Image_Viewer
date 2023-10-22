@@ -1,4 +1,5 @@
 <script lang="ts">
+import { ref } from 'vue';
 import {
   image,
   filePath,
@@ -11,10 +12,8 @@ import {
   folderIndex,
   changeFolder,
 } from './FileManager.vue';
-
-import { ref } from 'vue';
-
-const scale = ref(1.0);
+import { scale, imageStyle, defaultImageStyle, showFilePath } from './Image.vue';
+import { openImage } from './FileManager.vue';
 
 const nextFile = () => {
   if (fileIndex.value + 1 >= filesInFolder.value.length) {
@@ -59,7 +58,7 @@ const toggleFullScreen = () => {
 };
 
 const toggleShowFilePath = () => {
-  // showFilePath.update((b) => !b);
+  showFilePath.value = !showFilePath.value;
 };
 
 export const handleKeydown = (event) => {
@@ -86,23 +85,23 @@ export const handleKeydown = (event) => {
       break;
     case "b":
       if (event.ctrlKey) {
-        // imageStyle.set(defaultImageStyle);
+        imageStyle.value = defaultImageStyle;
         scale.value = (1.0);
       }
       break;
     case "w":
       if (event.ctrlKey) {
-        // imageStyle.set("width: 100%; height: auto;");
+        imageStyle.value = "width: 100%; height: auto;";
       }
       break;
     case "h":
       if (event.ctrlKey) {
-        // imageStyle.set("width: auto; height: 100%;");
+        imageStyle.value = "width: auto; height: 100%;";
       }
       break;
     case "o":
       if (event.ctrlKey) {
-        // openFile();
+        openImage();
       }
       break;
     case "q":
