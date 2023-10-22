@@ -14,10 +14,8 @@ import {
 const image = ref<string>('');
 
 watchEffect(() => {
-  if (file.value) {
-    window.fileManaging.readImage(file.value)
-      .then((imageBlob) => image.value = imageBlob);
-  }
+  file.value && window.fileManaging.readImage(file.value)
+    .then((imageBlob) => image.value = imageBlob)
 });
 
 
