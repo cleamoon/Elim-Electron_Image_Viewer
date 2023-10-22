@@ -12,8 +12,8 @@ import {
   folderIndex,
   changeFolder,
 } from './FileManager.vue';
-import { scale, imageStyle, defaultImageStyle, showFilePath } from './Image.vue';
-import { openImage } from './FileManager.vue';
+import { scale, imageStyle, defaultImageStyle, showFilePath } from './ImageStates.vue';
+import { openImage, deleteFile } from './FileManager.vue';
 
 const nextFile = () => {
   if (fileIndex.value + 1 >= filesInFolder.value.length) {
@@ -91,12 +91,18 @@ export const handleKeydown = (event) => {
       break;
     case "w":
       if (event.ctrlKey) {
-        imageStyle.value = "width: 100%; height: auto;";
+        imageStyle.value = ({
+          width: '100%',
+          height: 'auto',
+        })
       }
       break;
     case "h":
       if (event.ctrlKey) {
-        imageStyle.value = "width: auto; height: 100%;";
+        imageStyle.value = ({
+          width: 'auto',
+          height: '100%',
+        })
       }
       break;
     case "o":
@@ -120,11 +126,11 @@ export const handleKeydown = (event) => {
       }
       break;
     case "Delete":
-      // deleteFile();
+      deleteFile();
       break;
     case "d":
       if (event.ctrlKey) {
-        // deleteFile();
+        deleteFile();
       }
       break;
     case "p":
