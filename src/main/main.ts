@@ -84,3 +84,6 @@ ipcMain.handle('getFoldersInFolder', async (_, folderPath) =>
 
 ipcMain.handle('readImage', async (_, imagePath) =>
   fs.readFile(imagePath).then((buffer) => `data:image/jpeg;base64, ${buffer.toString('base64')}`))
+
+ipcMain.handle('deleteFile', async (_, filePath) => 
+  fs.unlink(filePath))

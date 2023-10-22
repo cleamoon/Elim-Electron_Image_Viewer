@@ -9,4 +9,5 @@ contextBridge.exposeInMainWorld('fileManaging', {
   getFilesInFolder: (folderPath: string) => ipcRenderer.invoke('getFilesInFolder', folderPath),
   getFoldersInFolder: (folderPath: string) => ipcRenderer.invoke('getFoldersInFolder', folderPath),
   readImage: (imagePath: string) => ipcRenderer.invoke('readImage', imagePath),
+  deleteFile: (filePath: string) => ipcRenderer.invoke('deleteFile', filePath),
 })

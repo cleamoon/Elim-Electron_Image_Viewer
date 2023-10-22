@@ -10,6 +10,7 @@ interface FileManagingApi {
   getFilesInFolder: (folderPath: string) => Promise<string[]>
   getFoldersInFolder: (folderPath: string) => Promise<string[]>
   readImage: (imagePath: string) => Promise<Buffer>
+  deleteFile: (filePath: string) => Promise<void>
 }
 
 declare global {

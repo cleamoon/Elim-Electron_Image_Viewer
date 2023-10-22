@@ -62,4 +62,14 @@ export const openImage = () => {
         .then((folders) => folderIndex.value = folders.indexOf(folder))
     })
 };
+
+export const deleteFile = () => {
+  if (fileIndex.value >= 0) {
+    window.fileManaging.deleteFile(file.value)
+      .then(() => {
+        filesInFolder.value.splice(fileIndex.value, 1);
+        fileIndex.value -= 1;
+      })
+  }
+}
 </script>
