@@ -86,4 +86,14 @@ ipcMain.handle('readImage', async (_, imagePath) =>
   fs.readFile(imagePath).then((buffer) => `data:image/jpeg;base64, ${buffer.toString('base64')}`))
 
 ipcMain.handle('deleteFile', async (_, filePath) => 
-  fs.unlink(filePath))
+  dialog.showMessageBox({
+    type: 'warning',
+    title: 'Delete file',
+    message: `Are you sure you want to delete ${filePath}?`,
+    buttons: ['Yes', 'No'],
+    defaultId: 1,
+    cancelId: 1,
+  })
+    .then(({ response }) => {
+      if (response === 0) return fs.unlink(filePath);
+    }))
