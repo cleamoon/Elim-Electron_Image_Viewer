@@ -28,7 +28,6 @@ const sorter = (a: string, b: string) => {
 export const changeFolder = (direction: number) => {
   if (direction > 0 && folderIndex.value + 1 <= foldersInParentFolder.value.length) {
     folderIndex.value += 1;
-    console.log(folderPath.value)
     window.fileManaging.getFilesInFolder(folderPath.value || '')
       .then((files) => filesInFolder.value = files.sort(sorter).map((file) => folderPath.value + "/" + file))
       .then(() => fileIndex.value = 0)
