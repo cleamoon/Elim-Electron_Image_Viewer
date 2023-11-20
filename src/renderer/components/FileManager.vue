@@ -29,13 +29,17 @@ export const changeFolder = (direction: number) => {
   if (direction > 0 && folderIndex.value + 1 <= foldersInParentFolder.value.length) {
     folderIndex.value += 1;
     window.fileManaging.getFilesInFolder(folderPath.value || '')
-      .then((files) => filesInFolder.value = files.sort(sorter).map((file) => folderPath.value + "/" + file))
-      .then(() => fileIndex.value = 0)
+      .then((files) => {
+        filesInFolder.value = files.sort(sorter).map((file) => folderPath.value + "/" + file)
+        fileIndex.value = 0
+      })
   } else if (direction < 0 && folderIndex.value - 1 >= 0) {
     folderIndex.value -= 1;
     window.fileManaging.getFilesInFolder(folderPath.value || '')
-      .then((files) => filesInFolder.value = files.sort(sorter).map((file) => folderPath.value + "/" + file))
-      .then((files) => fileIndex.value = files.length - 1)
+      .then((files) => {
+        filesInFolder.value = files.sort(sorter).map((file) => folderPath.value + "/" + file)
+        fileIndex.value = files.length - 1
+      })
   }
 }
 
@@ -53,12 +57,16 @@ export const openImage = () => {
       parentFolderPath.value = parentFolder;
 
       fileManaging.getFilesInFolder(folder)
-        .then((files) => filesInFolder.value = files.sort(sorter).map((file) => folder + "/" + file))
-        .then((files) => fileIndex.value = files.indexOf(filePath))
+        .then((files) => {
+          filesInFolder.value = files.sort(sorter).map((file) => folder + "/" + file)
+          fileIndex.value = files.indexOf(filePath)
+        })
 
       fileManaging.getFoldersInFolder(parentFolder)
-        .then((folders) => foldersInParentFolder.value = folders.sort(sorter).map((folder) => parentFolder + "/" + folder))
-        .then((folders) => folderIndex.value = folders.indexOf(folder))
+        .then((folders) => {
+          foldersInParentFolder.value = folders.sort(sorter).map((folder) => parentFolder + "/" + folder)
+          folderIndex.value = folders.indexOf(folder)
+        })
     })
 };
 
