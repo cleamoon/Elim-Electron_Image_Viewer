@@ -59,7 +59,7 @@ export const openImage = () => {
       fileManaging.getFilesInFolder(folder)
         .then((files) => {
           filesInFolder.value = files.sort(sorter).map((file) => folder + "/" + file)
-          fileIndex.value = files.indexOf(filePath)
+          fileIndex.value = filesInFolder.value.indexOf(filePath)
         })
 
       fileManaging.getFoldersInFolder(parentFolder)
