@@ -65,7 +65,7 @@ export const openImage = () => {
       fileManaging.getFoldersInFolder(parentFolder)
         .then((folders) => {
           foldersInParentFolder.value = folders.sort(sorter).map((folder) => parentFolder + "/" + folder)
-          folderIndex.value = folders.indexOf(folder)
+          folderIndex.value = foldersInParentFolder.value.indexOf(folder)
         })
     })
 };
