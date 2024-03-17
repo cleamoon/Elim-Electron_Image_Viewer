@@ -1,6 +1,6 @@
 {
   "name": "elim",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A minimal image viewer written in Electron and Vue.js",
   "main": "build/main/main.js",
   "scripts": {
