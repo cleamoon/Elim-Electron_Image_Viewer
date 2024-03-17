@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
-        node-version: [18.x] # Adjust the Node version as needed
+        node-version: [18.x]
     name: Build on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@v2
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Yarn
-        run: npm install -g yarn # This step can be adjusted or removed if not necessary
+        run: npm install -g yarn
       - name: Install Dependencies
         run: yarn install
       - name: Build and Package App
