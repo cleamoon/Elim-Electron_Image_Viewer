@@ -1,4 +1,4 @@
-name: Build Electron App
+name: Build Electron App with Yarn
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
-        node-version: [18.x] # Adjust the Node version as needed
+        node-version: [14.x] # Adjust the Node version as needed
     name: Build on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@v2
@@ -19,9 +19,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install Yarn
+        run: npm install -g yarn # This step can be adjusted or removed if not necessary
       - name: Install Dependencies
-        run: npm install
+        run: yarn install
       - name: Build and Package App
-        run: npm run build && npm run package
+        run: yarn build && yarn package
         env:
           CI: true
