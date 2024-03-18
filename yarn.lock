@@ -150,6 +150,14 @@
   dependencies:
     "@electron-forge/shared-types" "7.3.0"
 
+"@electron-forge/plugin-fuses@7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-fuses/-/plugin-fuses-7.3.0.tgz#d67f389d03dde722026d87e6e9c903c7c82cacf0"
+  integrity sha512-+p23S+NQwia+uX1D6Hx01R2b0Ck2bNVDgS1JL8lyU8cz3OXAA3J52Ck94wMslwmj2TfdV0ErsMxI/QOQlPffiw==
+  dependencies:
+    "@electron-forge/plugin-base" "7.3.0"
+    "@electron-forge/shared-types" "7.3.0"
+
 "@electron-forge/publisher-base@7.3.0":
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@electron-forge/publisher-base/-/publisher-base-7.3.0.tgz#4da19c3f3f448ad90f09c88d8347a2cb7d6398b0"
