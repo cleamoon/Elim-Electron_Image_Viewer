@@ -5,7 +5,7 @@
   "main": "src/main/main.ts",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "clean": "rm -rf node_modules && rm -rf build && mkdir build && rm -rf dist && mkdir dist && rm -rf dist-electron && mkdir dist-electron",
+    "clean": "rm -rf node_modules && rm -rf build/* && rm -rf dist/* && rm -rf dist-electron/* && rm -rf out/* ",
     "build": "node scripts/build.js && electron-builder",
     "build:win": "node scripts/build.js && electron-builder --win",
     "build:mac": "node scripts/build.js && electron-builder --mac",
