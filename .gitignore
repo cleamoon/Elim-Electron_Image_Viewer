@@ -5,3 +5,5 @@ dist-electron
 .vscode
 .idea
 .DS_Store
+
+out/

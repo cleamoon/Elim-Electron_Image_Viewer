@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, session, dialog } from 'electron';
 import { join } from 'path';
 import * as fs from 'fs/promises';
+require('update-electron-app')()
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
