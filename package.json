@@ -2,10 +2,10 @@
   "name": "elim",
   "version": "0.1.1",
   "description": "A minimal image viewer written in Electron and Vue.js",
-  "main": "build/main/main.js",
+  "main": "src/main/main.ts",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "clean": "rm -rf node_modules && rm -rf build && mkdir build",
+    "clean": "rm -rf node_modules && rm -rf build && mkdir build && rm -rf dist && mkdir dist && rm -rf dist-electron && mkdir dist-electron",
     "build": "node scripts/build.js && electron-builder",
     "build:win": "node scripts/build.js && electron-builder --win",
     "build:mac": "node scripts/build.js && electron-builder --mac",
